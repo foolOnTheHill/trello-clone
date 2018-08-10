@@ -9,13 +9,13 @@ import {
   Headers
 } from '@nestjs/common';
 
-import { ValidationPipe } from '../../common/pipes/validation.pipe';
+import { ValidationPipe } from '../../../common/pipes/validation.pipe';
 
-import { AuthService } from './auth.service';
+import { AuthService } from '../services';
 
-import { AuthToken } from './types/tokens.type';
+import { AuthToken } from '../../../common/types/tokens.type';
 
-import { CredentialsDto, UserDto } from './dto';
+import { CredentialsDto, UserDto } from '../dto';
 
 @Controller('auth')
 export class AuthController {

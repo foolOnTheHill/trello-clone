@@ -1,2 +1,2 @@
-export * from './auth/auth.module';
-export * from './boards/boards.module';
+export * from './app/app.module';
+export * from './database/database.module';

@@ -9,13 +9,13 @@ import {
   Headers
 } from '@nestjs/common';
 
-import { ValidationPipe } from '../../common/pipes/validation.pipe';
+import { ValidationPipe } from '../../../common/pipes/validation.pipe';
 
-import { BoardsService } from './boards.service';
+import { BoardsService } from '../services';
 
-import { BoardDto, ListDto, CardDto } from './dto';
+import { BoardDto, ListDto, CardDto } from '../dto';
 
-import { } from './interfaces';
+import { } from '../interfaces';
 
 @Controller('boards')
 export class BoardsController {
