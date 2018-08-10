@@ -1,9 +1,8 @@
-import { ListId } from '../types';
+import { Document } from 'mongoose';
 
 import { Card } from './card.interface';
 
-export interface List {
+export interface List extends Document {
 	title : string;
-	id? : ListId;
 	cards? : Card[];
 }
