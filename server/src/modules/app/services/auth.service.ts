@@ -2,10 +2,10 @@ import { Component, Inject, Res, BadRequestException, ForbiddenException } from 
 
 import { Model } from 'mongoose';
 
-import { AuthToken } from './types/tokens.type';
+import { AuthToken } from '../../../common/types/tokens.type';
 
-import { User } from './interfaces';
-import { CredentialsDto, UserDto } from './dto';
+import { User } from '../interfaces';
+import { CredentialsDto, UserDto } from '../dto';
 
 @Component()
 export class AuthService {

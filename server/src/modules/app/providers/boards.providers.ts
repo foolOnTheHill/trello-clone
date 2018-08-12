@@ -1,6 +1,6 @@
 import { Connection } from 'mongoose';
 
-import { BoardSchema, ListSchema, CardSchema } from './schemas';
+import { BoardSchema, ListSchema, CardSchema } from '../schemas';
 
 export const boardsProviders = [
   {

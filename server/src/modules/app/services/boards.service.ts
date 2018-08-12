@@ -2,8 +2,8 @@ import { Component, Inject, Res, BadRequestException, ForbiddenException } from 
 
 import { Model } from 'mongoose';
 
-import { Board, List, Card } from './interfaces';
-import { BoardDto, ListDto, CardDto } from './dto';
+import { Board, List, Card } from '../interfaces';
+import { BoardDto, ListDto, CardDto } from '../dto';
 
 @Component()
 export class BoardsService {
