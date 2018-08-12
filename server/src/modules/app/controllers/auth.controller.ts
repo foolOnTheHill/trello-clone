@@ -17,6 +17,8 @@ import { AuthToken } from '../../../common/types/tokens.type';
 
 import { CredentialsDto, UserDto } from '../dto';
 
+import { User } from '../interfaces';
+
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -31,14 +33,14 @@ export class AuthController {
 
 	@Post('register')
 	@UsePipes(new ValidationPipe())
-	async register(@Body() credentials : UserDto) : Promise<void> {
+	async register(@Body() credentials : UserDto) : Promise<User> {
 		return this.auth.register(credentials);
 	}
 
 	@Post('logout')
 	@UsePipes(new ValidationPipe())
 	async logout(@Headers() headers) : Promise<void> {
-		return this.auth.register(headers.authorization);
+		return this.auth.logout(headers.authorization);
 	}
 
 }
