@@ -1,10 +1,7 @@
 import {
   Controller,
-  Put,
-	Get,
 	Post,
   Body,
-  Param,
   UsePipes,
   Headers
 } from '@nestjs/common';
