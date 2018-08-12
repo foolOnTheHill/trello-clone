@@ -70,44 +70,107 @@ export class BoardsService {
 		return;
 	}
 
-	public async findAllLists(token : AuthToken) : Promise<List[]> {
-		return null;
+	public async findAllLists(token : AuthToken, boardId : BoardId) : Promise<List[]> {
+		const board = await this.findOneBoard(token, boardId);
+
+		const lists = await this.listModel.find({ board : board._id }).populate('board').exec();
+
+		return lists || [];
 	}
 
-	public async createList(token : AuthToken, list : ListDto) : Promise<void> {
-		return null;
+	public async createList(token : AuthToken, boardId : BoardId, list : ListDto) : Promise<List> {
+		const board = await this.findOneBoard(token, boardId);
+
+		const listData = {
+			title : list.title,
+			board : board._id
+		};
+
+		const newList = new this.listModel(listData);
+
+		return await newList.save();
 	}
 
-	public async findOneList(token : AuthToken, listId : ListId) : Promise<List> {
-		return null;
+	public async findOneList(token : AuthToken, boardId : BoardId, listId : ListId) : Promise<List> {
+		const board = await this.findOneBoard(token, boardId);
+
+		const list = await this.listModel.findById(listId).populate('board').exec();
+
+		if (!list) {
+			throw new BadRequestException(`List does not exists : ${listId}`);
+		} else if (list.board._id !== board._id) {
+			throw new ForbiddenException(`User does not have access to this list : ${listId}`)
+		} else {
+			return list;
+		}
 	}
 
-	public async updateList(token : AuthToken, listId : ListId, list : ListDto) : Promise<void> {
-		return null;
+	public async updateList(token : AuthToken, boardId : BoardId, listId : ListId, list : ListDto) : Promise<List> {
+		const currentList = await this.findOneList(token, boardId, listId);
+
+		currentList.set(list);
+
+		return await currentList.save();
 	}
 
-	public async deleteList(token : AuthToken, listId : ListId) : Promise<void> {
-		return null;
+	public async deleteList(token : AuthToken, boardId : BoardId, listId : ListId) : Promise<void> {
+		const list = await this.findOneList(token, boardId, listId);
+
+		await list.remove();
+
+		return;
 	}
 
-	public async findAllCards(token : AuthToken) : Promise<Card[]> {
-		return null;
+	public async findAllCards(token : AuthToken, boardId : BoardId, listId: ListId) : Promise<Card[]> {
+		const list = await this.findOneList(token, boardId, listId);
+
+		const cards = await this.cardModel.find({ list : list._id }).populate('list').exec();
+
+		return cards || [];
 	}
 
-	public async createCard(token : AuthToken, card : CardDto) : Promise<void> {
-		return null;
+	public async createCard(token : AuthToken, boardId : BoardId, listId : ListId, card : CardDto) : Promise<Card> {
+		const list = await this.findOneList(token, boardId, listId);
+
+		const cardData = {
+			title : card.title,
+			description : card.content,
+			list : list._id
+		};
+
+		const newCard = new this.cardModel(cardData);
+
+		return await newCard.save();
 	}
 
-	public async findOneCard(token : AuthToken, cardId : CardId) : Promise<Card> {
-		return null;
+	public async findOneCard(token : AuthToken, boardId : BoardId, listId : ListId, cardId : CardId) : Promise<Card> {
+		const list = await this.findOneList(token, boardId, listId);
+
+		const card = await this.cardModel.findById(cardId).populate('list').exec();
+
+		if (!card) {
+			throw new BadRequestException(`Card does not exists : ${cardId}`);
+		} else if (card.list._id !== list._id) {
+			throw new ForbiddenException(`User does not have access to this card : ${cardId}`)
+		} else {
+			return card;
+		}
 	}
 
-	public async updateCard(token : AuthToken, cardId : CardId, card : CardDto) : Promise<void> {
-		return null;
+	public async updateCard(token : AuthToken, boardId : BoardId, listId : ListId, cardId : CardId, card : CardDto) : Promise<Card> {
+		const currentCard = await this.findOneCard(token, boardId, listId, cardId);
+
+		currentCard.set(card);
+
+		return await currentCard.save();
 	}
 
-	public async deleteCard(token : AuthToken, cardId : CardId) : Promise<void> {
-		return null;
+	public async deleteCard(token : AuthToken, boardId : BoardId, listId : ListId, cardId : CardId) : Promise<void> {
+		const currentCard = await this.findOneCard(token, boardId, listId, cardId);
+
+		await currentCard.remove();
+
+		return;
 	}
 
 }
