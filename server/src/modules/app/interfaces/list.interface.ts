@@ -1,8 +1,8 @@
 import { Document } from 'mongoose';
 
-import { Card } from './card.interface';
+import { Board } from './board.interface';
 
 export interface List extends Document {
 	title : string;
-	cards? : Card[];
+	board : Board;
 }

@@ -27,29 +27,29 @@ export class BoardsController {
 
 	@Get()
 	async findAllBoards(@Headers() headers) : Promise<Board[]>{
-		return null;
+		return this.boards.findAllBoards(headers.authorization);
 	}
 
 	@Post()
 	@UsePipes(new ValidationPipe())
-	async createBoard(@Headers() headers, @Body() createBoardDto : BoardDto) : Promise<void>{
-		return null;
+	async createBoard(@Headers() headers, @Body() createBoardDto : BoardDto) : Promise<Board>{
+		return this.boards.createBoard(headers.authorization, createBoardDto);
 	}
 
 	@Get(':boardId')
 	async findOneBoard(@Headers() headers, @Param() params) : Promise<Board> {
-		return null;
+		return this.boards.findOneBoard(headers.authorization, params.boardId);
 	}
 
 	@Put(':boardId')
 	@UsePipes(new ValidationPipe())
-	async updateBoard(@Headers() headers, @Body() updateBoardDto : BoardDto, @Param() params) : Promise<void> {
-		return null;
+	async updateBoard(@Headers() headers, @Body() updateBoardDto : BoardDto, @Param() params) : Promise<Board> {
+		return this.boards.updateBoard(headers.authorization, params.boardId, updateBoardDto);
 	}
 
 	@Delete(':boardId')
 	async deleteBoard(@Headers() headers, @Param() params) : Promise<void> {
-		return null;
+		return this.boards.deleteBoard(headers.authorization, params.boardId);
 	}
 
 	@Get(':boardId/lists')
