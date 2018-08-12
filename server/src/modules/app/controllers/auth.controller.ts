@@ -25,7 +25,7 @@ export class AuthController {
 
 	@Post('login')
 	@UsePipes(new ValidationPipe())
-	async getPlayerProfile(@Body() credentials : CredentialsDto) : Promise<AuthToken> {
+	async login(@Body() credentials : CredentialsDto) : Promise<AuthToken> {
 		return this.auth.login(credentials);
 	}
 

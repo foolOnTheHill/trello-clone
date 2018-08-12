@@ -2,7 +2,7 @@ import { Component, Inject, Res, BadRequestException, ForbiddenException } from 
 
 import { Model } from 'mongoose';
 
-import { AuthToken } from '../../../common/types/tokens.type';
+import { AuthToken } from '../../../common/types';
 
 import { User } from '../interfaces';
 import { CredentialsDto, UserDto } from '../dto';
@@ -15,17 +15,22 @@ export class AuthService {
 	) {}
 
 	// TODO:
-	public async login (credentials : CredentialsDto) : Promise<AuthToken> {
+	public async login(credentials : CredentialsDto) : Promise<AuthToken> {
 		return null;
 	}
 
 	// TODO:
-	public async register (credentials : UserDto) : Promise<void> {
+	public async register(credentials : UserDto) : Promise<void> {
 		return null;
 	}
 
 	// TODO:
-	public async logout (token : AuthToken) : Promise<void> {
+	public async logout(token : AuthToken) : Promise<void> {
+		return null;
+	}
+
+	// TODO:
+	public async authorize(token : AuthToken) : Promise<User> {
 		return null;
 	}
 
