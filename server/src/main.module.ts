@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { AppModule } from './modules'
 
 @Module({
-  modules : [
+  imports : [
 		AppModule
 	]
 })

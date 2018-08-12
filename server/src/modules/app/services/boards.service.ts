@@ -1,4 +1,4 @@
-import { Component, Inject, BadRequestException, ForbiddenException } from '@nestjs/common';
+import { Injectable, Inject, BadRequestException, ForbiddenException } from '@nestjs/common';
 
 import { Model } from 'mongoose';
 
@@ -9,7 +9,7 @@ import { BoardDto, ListDto, CardDto } from '../dto';
 
 import { AuthService } from './auth.service';
 
-@Component()
+@Injectable()
 export class BoardsService {
 
 	constructor(

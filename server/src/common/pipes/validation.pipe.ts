@@ -1,6 +1,6 @@
 import {
   PipeTransform,
-  Pipe,
+  Injectable,
   ArgumentMetadata,
   HttpStatus,
 	HttpException
@@ -9,7 +9,7 @@ import {
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 
-@Pipe()
+@Injectable()
 export class ValidationPipe implements PipeTransform<any> {
 
   async transform(value, metadata : ArgumentMetadata) {

@@ -6,15 +6,16 @@ import { boardsProviders, authProviders } from './providers';
 import { BoardsService, AuthService } from './services';
 
 @Module({
-  modules: [
+  imports: [
 		DatabaseModule
 	],
   controllers: [
 		BoardsController,
 		AuthController
 	],
-  components: [
+  providers: [
 		BoardsService,
+		AuthService,
 		...boardsProviders,
 		...authProviders
 	]
