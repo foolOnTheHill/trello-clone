@@ -9,6 +9,8 @@ import { environment } from '../../environments/environment';
 import { AuthToken } from '../../common/types';
 import { User, LoginCredentials, RegisterCredentials } from '../../common/interfaces';
 
+import { handleError } from '../../common/error';
+
 const BackendUrl = environment.backendUrl;
 
 export interface IAuth {
@@ -51,11 +53,7 @@ export class UserService {
 			this.current = auth.user;
 			this.token = auth.token;
 		} catch (error) {
-			if (error.error instanceof ErrorEvent) {
-				throw new Error(error.message);
-			} else {
-				throw new Error(error.error.error);
-			}
+			handleError(error);
 		}
 	}
 
@@ -72,17 +70,13 @@ export class UserService {
 			.first()
 			.toPromise();
 		} catch (error) {
-			if (error.error instanceof ErrorEvent) {
-				throw new Error(error.message);
-			} else {
-				throw new Error(error.error.error);
-			}
+			handleError(error);
 		}
 	}
 
 	public async logout() : Promise<void> {
 		try {
-			await this.http.get<void>(
+			await this.http.post<void>(
 				`${BackendUrl}/auth/logout`,
 				{
 					headers: new HttpHeaders({
@@ -96,11 +90,7 @@ export class UserService {
 			this.current = null;
 			this.token = null;
 		} catch (error) {
-			if (error.error instanceof ErrorEvent) {
-				throw new Error(error.message);
-			} else {
-				throw new Error(error.error.error);
-			}
+			handleError(error);
 		}
 	}
 }
