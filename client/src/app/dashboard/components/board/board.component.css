@@ -13,7 +13,7 @@
 .list-container {
 	display: -webkit-box;
 	padding: 15px;
-	height: 80%;
+	height: 150%;
 	white-space: nowrap;
 	overflow-x: auto;
 	overflow-y: hidden;

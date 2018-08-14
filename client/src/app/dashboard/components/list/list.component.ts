@@ -17,6 +17,8 @@ export class ListComponent implements OnInit {
 
 	isFormVisible = false;
 
+	error = '';
+
 	constructor(
 		private boardService : BoardsService
 	) {
@@ -29,6 +31,21 @@ export class ListComponent implements OnInit {
 
 	ngOnInit() {
 		this.fetchListCards();
+	}
+
+	async addCard() {
+		try {
+			await this.boardService.createCard(this.list.board._id, this.list._id, this.newCard);
+
+			this.newCard.title = '';
+			this.newCard.content = '';
+
+			await this.fetchListCards();
+
+			this.isFormVisible = false;
+		} catch(error) {
+			this.error = error.message;
+		}
 	}
 
 	setFormVisibility(status) {

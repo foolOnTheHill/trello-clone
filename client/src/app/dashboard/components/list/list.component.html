@@ -8,7 +8,7 @@
 		<div *ngFor="let card of cards" class="card">
 			<app-card id="{{card._id}}" [data]="card"></app-card>
 		</div>
-		<div *ngIf="!list.cards || !list.cards.length" class="height-100">
+		<div *ngIf="!cards || !cards.length" class="height-100">
 			<span class="text-muted">No cards available</span>
 		</div>
 	</div>
