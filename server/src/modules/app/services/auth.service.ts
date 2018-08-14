@@ -18,7 +18,7 @@ export class AuthService {
 
 	public async login(credentials : CredentialsDto) : Promise<LoginResponse> {
 		try {
-			const user = await this.userModel.findOne({email : credentials.email}).exec();
+			const user = await this.userModel.findOne({email : credentials.email, password : credentials.password}).exec();
 
 			const userData = {
 				name : user.name,
