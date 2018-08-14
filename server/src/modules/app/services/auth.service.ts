@@ -66,6 +66,8 @@ export class AuthService {
 	public async authorize(token : AuthToken) : Promise<User> {
 		const data : TokenData = await JwtUtil.verify(token);
 
+		console.log(data);
+
 		try {
 			return await this.userModel.findById(data.id).exec();
 		} catch(error) {

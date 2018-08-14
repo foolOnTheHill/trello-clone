@@ -47,7 +47,7 @@ export class BoardsService {
 
 		if (!board) {
 			throw new BadRequestException(`Board does not exists : ${boardId}`);
-		} else if (board.user._id !== user._id){
+		} else if (board.user._id.toString() !== user._id.toString()){
 			throw new ForbiddenException(`User does not have access to this board : ${boardId}`);
 		} else {
 			return board;
@@ -98,7 +98,7 @@ export class BoardsService {
 
 		if (!list) {
 			throw new BadRequestException(`List does not exists : ${listId}`);
-		} else if (list.board._id !== board._id) {
+		} else if (list.board._id.toString() !== board._id.toString()) {
 			throw new ForbiddenException(`User does not have access to this list : ${listId}`)
 		} else {
 			return list;
@@ -150,7 +150,7 @@ export class BoardsService {
 
 		if (!card) {
 			throw new BadRequestException(`Card does not exists : ${cardId}`);
-		} else if (card.list._id !== list._id) {
+		} else if (card.list._id.toString() !== list._id.toString()) {
 			throw new ForbiddenException(`User does not have access to this card : ${cardId}`)
 		} else {
 			return card;
