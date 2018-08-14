@@ -28,6 +28,15 @@ export class UserService {
 	) {
 		this.current = null;
 		this.token = null;
+
+		const auth = this.retrieveAuthData();
+
+		if (auth) {
+			console.log('User already logged in');
+
+			this.current = auth.user;
+			this.token = auth.token;
+		}
 	}
 
 	public get currentUser() : User {
@@ -50,11 +59,33 @@ export class UserService {
 			.first()
 			.toPromise();
 
+			this.saveAuthData(auth);
+
 			this.current = auth.user;
 			this.token = auth.token;
 		} catch (error) {
+			this.deleteAuthdata();
 			handleError(error);
 		}
+	}
+
+	private saveAuthData(auth : IAuth) {
+		const data = JSON.stringify(auth);
+		window.localStorage.setItem('user', data);
+	}
+
+	private retrieveAuthData() : IAuth {
+		const data = window.localStorage.getItem('user');
+
+		if (!data) { return null; }
+
+		const auth = JSON.parse(data);
+
+		return auth as IAuth;
+	}
+
+	private deleteAuthdata() {
+		window.localStorage.removeItem('user');
 	}
 
 	public async register(credentials : RegisterCredentials) : Promise<void> {
@@ -70,6 +101,7 @@ export class UserService {
 			.first()
 			.toPromise();
 		} catch (error) {
+			this.deleteAuthdata();
 			handleError(error);
 		}
 	}
@@ -87,6 +119,8 @@ export class UserService {
 			)
 			.first()
 			.toPromise();
+
+			this.deleteAuthdata();
 
 			this.current = null;
 			this.token = null;
