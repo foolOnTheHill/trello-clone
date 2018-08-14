@@ -78,6 +78,7 @@ export class UserService {
 		try {
 			await this.http.post<void>(
 				`${BackendUrl}/auth/logout`,
+				{},
 				{
 					headers: new HttpHeaders({
 						'Authorization': this.token

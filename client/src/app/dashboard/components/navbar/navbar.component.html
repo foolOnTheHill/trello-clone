@@ -5,5 +5,5 @@
 	  Welcome, {{ this.userName }}!
   </span>
 
-  <button *ngIf="showLogout" class="btn btn-outline-primary" type="button">Logout</button>
+  <button *ngIf="showLogout" class="btn btn-outline-primary" type="button" (click)="doLogout()">Logout</button>
 </nav>
