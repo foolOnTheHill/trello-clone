@@ -4,7 +4,7 @@
 		<strong>{{list.title}}</strong>
 	</h4>
 
-	<div id="{{list._id}}" [dragula]="'bag'" [dragulaModel]="cards" [ngClass]="{'cards-list': cards && cards.length, 'height-100': !list.cards || !list.cards.length}">
+	<div id="{{list._id}}" [dragula]="'CARDS'" [dragulaModel]="cards" [ngClass]="{'cards-list': cards && cards.length, 'height-100': !list.cards || !list.cards.length}">
 		<div *ngFor="let card of cards" class="card">
 			<app-card id="{{card._id}}" [data]="card"></app-card>
 		</div>
@@ -14,6 +14,8 @@
 	</div>
 
 </div>
+
+<br>
 
 <div class="container">
 	<div *ngIf="!isFormVisible" (click)="setFormVisibility(true)">

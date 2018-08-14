@@ -27,11 +27,35 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private boardService : BoardsService,
-		private dragularService : DragulaService,
+		private dragulaService : DragulaService,
 		private route: ActivatedRoute
 	) {
 		this.board = null;
 		this.lists = [];
+
+		this.dragulaService.dropModel().subscribe((value) => {
+			this.updateCardList(value);
+		});
+	}
+
+	async updateCardList(args) {
+		const card = args.item;
+		const currentListId = args.source.id;
+		const newListId = args.target.id;
+
+		const newCard = {
+			title : card.title,
+			content : '',
+			list : newListId
+		};
+
+		try {
+			await this.boardService.updateCard(this.board._id, currentListId, card._id, newCard);
+
+			this.fetchBoardLists();
+		} catch(error) {
+			this.error = error;
+		}
 	}
 
 	async fetchBoardLists() {
