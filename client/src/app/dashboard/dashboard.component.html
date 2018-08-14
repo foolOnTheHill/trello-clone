@@ -29,7 +29,7 @@
 
 									<div class="col-4">
 										<div class="btn-group pull-right" role="group" aria-label="Basic example">
-											<button type="button" class="btn btn-success" (click)="addBoard()">Save</button>
+											<button type="button" [disabled]="newBoard.title.trim().length === 0 " class="btn btn-success" (click)="addBoard()">Save</button>
 											<button type="button" class="btn btn-danger" (click)="setFormVisibility(false)">Cancel</button>
 										</div>
 									</div>
