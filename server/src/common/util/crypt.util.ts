@@ -1,12 +1,12 @@
 import * as bcrypt from 'bcrypt';
 
-const SALT_ROUNDS = 10;
+import { CONFIG } from '../config/config';
 
 export class Crypt {
 
 	static async hashPassword(password : string) : Promise<string> {
 		return new Promise<string>((resolve, reject) => {
-			bcrypt.hash(password, SALT_ROUNDS, function(err, hash) {
+			bcrypt.hash(password, CONFIG.SALT_ROUNDS, function(err, hash) {
 				if (err) {
 					reject(err);
 				}
