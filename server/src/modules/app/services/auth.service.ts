@@ -7,7 +7,7 @@ import { AuthToken } from '../../../common/types';
 import { User, TokenData, LoginResponse } from '../interfaces';
 import { CredentialsDto, UserDto } from '../dto';
 
-import { JwtUtil } from '../../../common/util';
+import { JwtUtil, Crypt } from '../../../common/util';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +18,11 @@ export class AuthService {
 
 	public async login(credentials : CredentialsDto) : Promise<LoginResponse> {
 		try {
-			const user = await this.userModel.findOne({email : credentials.email, password : credentials.password}).exec();
+			const user = await this.userModel.findOne({ email : credentials.email }).exec();
+
+			const passwordsAreEqual = await Crypt.compare(credentials.password, user.password);
+
+			if (!passwordsAreEqual) { throw new ForbiddenException(); }
 
 			const userData = {
 				name : user.name,
@@ -37,7 +41,7 @@ export class AuthService {
 				user : userData
 			} as LoginResponse;
 		} catch(error) {
-			throw new ForbiddenException(`Could not find user for email: ${credentials.email}`);
+			throw new ForbiddenException(`Wrong email or password.`);
 		}
 	}
 
@@ -45,7 +49,15 @@ export class AuthService {
 		const user = await this.userModel.findOne({email : credentials.email}).exec();
 
 		if (!user) {
-			const newUser = new this.userModel(credentials);
+			const hash = await Crypt.hashPassword(credentials.password);
+
+			const userData = {
+				name : credentials.name,
+				email : credentials.email,
+				password : hash
+			} as CredentialsDto;
+
+			const newUser = new this.userModel(userData);
 
 			return await newUser.save();
 		} else {
