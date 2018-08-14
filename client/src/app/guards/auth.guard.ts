@@ -12,10 +12,14 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
 	public canActivate(route : ActivatedRouteSnapshot, state : RouterStateSnapshot) : boolean {
 		if (!this.user.currentUser) {
+			console.log('User unauthorized');
+
 			this.router.navigate(['/login']);
 
 			return false;
 		} else {
+			console.log('User authorized');
+
 			return true;
 		}
 	}

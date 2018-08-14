@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	) { }
 
 	ngOnInit() {
-		if (!this.userService.currentUser) {
+		if (this.userService.currentUser) {
 			this.router.navigate(['/']);
 		}
 	}

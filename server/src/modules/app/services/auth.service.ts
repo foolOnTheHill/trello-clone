@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 
 import { AuthToken } from '../../../common/types';
 
-import { User, TokenData } from '../interfaces';
+import { User, TokenData, LoginResponse } from '../interfaces';
 import { CredentialsDto, UserDto } from '../dto';
 
 import { JwtUtil } from '../../../common/util';
@@ -16,19 +16,26 @@ export class AuthService {
 		@Inject('UserModelToken') private readonly userModel: Model<User>
 	) {}
 
-	public async login(credentials : CredentialsDto) : Promise<AuthToken> {
+	public async login(credentials : CredentialsDto) : Promise<LoginResponse> {
 		try {
 			const user = await this.userModel.findOne({email : credentials.email}).exec();
 
-			const tokenData = {
-				id : user._id,
-				user : {
-					name : user.name,
-					email : user.email
-				}
+			const userData = {
+				name : user.name,
+				email : user.email
 			};
 
-			return (await JwtUtil.sign(tokenData)) as AuthToken;
+			const tokenData = {
+				id : user._id,
+				user : userData
+			};
+
+			const token = (await JwtUtil.sign(tokenData)) as AuthToken;
+
+			return {
+				token : token,
+				user : userData
+			} as LoginResponse;
 		} catch(error) {
 			throw new ForbiddenException(`Could not find user for email: ${credentials.email}`);
 		}

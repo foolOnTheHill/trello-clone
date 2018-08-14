@@ -7,5 +7,5 @@ import { Environment } from '../common/interfaces';
 
 export const environment : Environment = {
   production: true,
-	backendUrl: 'localhost:3000'
+	backendUrl: 'http://localhost:3000'
 };

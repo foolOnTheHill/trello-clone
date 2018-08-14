@@ -1,3 +1,59 @@
 <div class="container">
-	<h1>Bem Vindo</h1>
+
+	<div class="row">
+		<div class="container">
+			<div class="row">
+				<div class="jumbotron jumbotron-fluid">
+				  <div class="container">
+						<p class="h1">Welcome, {{ this.userService.currentUser.name }}!</p>
+						<hr class="my-4">
+						<p>View and create boards below:</p>
+
+						<div class="row" *ngIf="!isFormVisible" (click)="setFormVisibility(true)">
+							<div class="col">
+								<button type="button" class="btn btn-primary">Create new board</button>
+							</div>
+						</div>
+
+						<div class="row" *ngIf="isFormVisible">
+							<div class="container">
+								<div class="row">
+									<div *ngIf="error" class="alert alert-danger" role="alert">
+										<strong>Oops!</strong> {{ error }}
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-8">
+										<input class="form-control" [(ngModel)]="newBoard.title" placeholder="Board Title..." />
+									</div>
+
+									<div class="col-4">
+										<div class="btn-group pull-right" role="group" aria-label="Basic example">
+											<button type="button" class="btn btn-success" (click)="addBoard()">Save</button>
+											<button type="button" class="btn btn-danger" (click)="setFormVisibility(false)">Cancel</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				  </div>
+				</div>
+		 </div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm">
+			<ul *ngFor="let board of boards" class="list-group">
+				<li class="list-group-item d-flex justify-content-between align-items-center">
+					{{ board.title }}
+				</li>
+			</ul>
+		</div>
+
+		<div *ngIf="!boards || !boards.length" class="height-100">
+			<span class="text-muted">No Boards available..</span>
+		</div>
+	</div>
+
 </div>

@@ -1,0 +1,36 @@
+<!-- <div>
+	<h4>
+		<strong>{{list.title}}</strong>
+	</h4>
+
+	<div id="{{list._id}}" [dragula]="'bag'" [dragulaModel]="list.cards" [ngClass]="{'cards-list': list.cards && list.cards.length, 'height-100': !list.cards || !list.cards.length}">
+		<div *ngFor="let card of list.cards" class="card">
+			<card id="{{card._id}}" [data]="card"></card>
+		</div>
+		<div *ngIf="!list.cards || !list.cards.length" class="height-100">
+			<span class="text-muted">No Cards available..</span>
+		</div>
+	</div>
+
+</div>
+
+<div>
+	<div *ngIf="!isFormVisible" (click)="setFormVisibility(true)">
+		<strong>
+			<span class="text-muted">Add Card...</span>
+		</strong>
+	</div>
+	<div class="row padding-15" *ngIf="isFormVisible">
+		<div class="center">
+			<textarea class="form-control" [(ngModel)]="newCardTitle" placeholder="Card Title..."></textarea>
+		</div>
+		<div class="margin-top-10 display-inline-flex pull-right">
+			<div class="padding-left-5">
+				<button class="btn btn-sm btn-danger" (click)="setFormVisibility(false)">Cancel</button>
+			</div>
+			<div class="padding-left-5">
+				<button class="btn btn-sm btn-success" (click)="addCard()">Add</button>
+			</div>
+		</div>
+	</div>
+</div> -->

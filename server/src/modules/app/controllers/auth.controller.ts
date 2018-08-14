@@ -10,11 +10,9 @@ import { ValidationPipe } from '../../../common/pipes/validation.pipe';
 
 import { AuthService } from '../services';
 
-import { AuthToken } from '../../../common/types/tokens.type';
-
 import { CredentialsDto, UserDto } from '../dto';
 
-import { User } from '../interfaces';
+import { User, LoginResponse } from '../interfaces';
 
 @Controller('auth')
 export class AuthController {
@@ -24,7 +22,7 @@ export class AuthController {
 
 	@Post('login')
 	@UsePipes(new ValidationPipe())
-	async login(@Body() credentials : CredentialsDto) : Promise<AuthToken> {
+	async login(@Body() credentials : CredentialsDto) : Promise<LoginResponse> {
 		return this.auth.login(credentials);
 	}
 

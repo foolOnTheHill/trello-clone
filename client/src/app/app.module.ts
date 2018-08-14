@@ -9,6 +9,10 @@ import { ModalModule } from 'ngx-bootstrap';
 
 import { BoardsService, UserService } from './services';
 
+import { RegisterModule } from './register/register.module';
+import { LoginModule } from './login/login.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+
 import { AppRoutingModule } from './app.routes';
 import { AppComponent } from './app.component';
 
@@ -25,13 +29,18 @@ import { AuthGuard } from './guards';
     HttpModule,
 		DragulaModule,
 		ModalModule,
-		AppRoutingModule
+		AppRoutingModule,
+		LoginModule,
+		RegisterModule,
+		DashboardModule
   ],
   providers: [
 		AuthGuard,
 		BoardsService,
 		UserService
 	],
-  bootstrap: [AppComponent]
+  bootstrap: [
+		AppComponent
+	]
 })
 export class AppModule { }
