@@ -37,8 +37,6 @@ export class BoardComponent implements OnInit, OnDestroy {
 	async fetchBoardLists() {
 		this.board = await this.boardService.findOneBoard(this.boardId);
 		this.lists = await this.boardService.findAllLists(this.boardId);
-
-		console.log(this.lists);
 	}
 
 	ngOnInit() {
@@ -54,6 +52,8 @@ export class BoardComponent implements OnInit, OnDestroy {
 			await this.boardService.createList(this.board._id, this.newList);
 
 			this.newList.title = '';
+
+			this.error = null;
 
 			this.addListModal.hide();
 

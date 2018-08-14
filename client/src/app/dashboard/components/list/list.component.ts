@@ -4,8 +4,6 @@ import { List, Card } from '../../../../common/interfaces';
 
 import { BoardsService } from '../../../services';
 
-import {DragulaService} from 'ng2-dragula';
-
 @Component({
 	selector: 'app-list',
 	templateUrl: './list.component.html',

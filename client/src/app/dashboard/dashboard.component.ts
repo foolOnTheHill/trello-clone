@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Board } from '../../common/interfaces';
 
@@ -10,8 +10,8 @@ import { BoardsService, UserService } from '../services';
 	styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+	@ViewChild('addBoardModal') addBoardModal;
 
-	isFormVisible = false;
 	newBoard : Board = { title: '' };
 	error = '';
 
@@ -38,18 +38,13 @@ export class DashboardComponent implements OnInit {
 
 			this.newBoard.title = '';
 
-			this.setFormVisibility(false);
-
+			this.addBoardModal.hide();
 			this.error = null;
 
 			this.fetchAllBoards();
 		} catch(error) {
 			this.error = error.message;
 		}
-	}
-
-	setFormVisibility(status) {
-		this.isFormVisible = status;
 	}
 
 }

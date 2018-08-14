@@ -1,5 +1,5 @@
 
-<div>
+<div class="container">
 	<h4>
 		<strong>{{list.title}}</strong>
 	</h4>
@@ -15,22 +15,29 @@
 
 </div>
 
-<div>
+<div class="container">
 	<div *ngIf="!isFormVisible" (click)="setFormVisibility(true)">
 		<strong>
 			<span class="text-muted">Add Card...</span>
 		</strong>
 	</div>
-	<div class="row padding-15" *ngIf="isFormVisible">
-		<div class="center">
-			<textarea class="form-control" [(ngModel)]="newCard.title" placeholder="Card Title..."></textarea>
-		</div>
-		<div class="margin-top-10 display-inline-flex pull-right">
-			<div class="padding-left-5">
-				<button class="btn btn-sm btn-danger" (click)="setFormVisibility(false)">Cancel</button>
-			</div>
-			<div class="padding-left-5">
-				<button class="btn btn-sm btn-success" (click)="addCard()">Add</button>
+	<div class="row">
+		<div class="col">
+			<div class="container-fluid" *ngIf="isFormVisible">
+				<div class="row">
+					<div class="center">
+						<input class="form-control" [(ngModel)]="newCard.title" placeholder="Card Title..."/>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col">
+						<div class="d-flex justify-content-around" role="group" aria-label="Basic example">
+							<button type="button" class="btn btn-sm btn-danger" (click)="setFormVisibility(false)">Cancel</button>
+							<button type="button" [disabled]="newCard.title.trim().length === 0 " class="btn btn-sm btn-success" (click)="addCard()">Save</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -6,6 +6,8 @@ import { NgModule } from '@angular/core';
 
 import { BoardsService, UserService } from './services';
 
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+
 import { RegisterModule } from './register/register.module';
 import { LoginModule } from './login/login.module';
 import { DashboardModule } from './dashboard/dashboard.module';

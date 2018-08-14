@@ -1,3 +1,5 @@
+<app-navbar></app-navbar>
+
 <div bsModal #addListModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -5,7 +7,7 @@
                 <button type="button" class="close" (click)="addListModal.hide()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Add List</h4>
+                <h4 class="modal-title">Create new List</h4>
             </div>
             <div class="modal-body">
                 <div class="input-group">
@@ -15,23 +17,33 @@
             </div>
             <div class="modal-footer">
 	        	<button type="button" class="btn btn-default" (click)="addListModal.hide()">Close</button>
-        		<button class="btn btn-success" (click)="addList()">Create</button>
+        		<button class="btn btn-success" (click)="addList()">Save</button>
 	      	</div>
         </div>
     </div>
 </div>
-<div>
-    <div class="col-sm-11"></div>
-    <div class="col-sm-1">
-        <button (click)="addListModal.show()" class="btn btn-primary">Add List</button>
-    </div>
-</div>
-<div class="list-container">
-    <div *ngFor="let list of lists" class="list">
-        <app-list [data]="list"></app-list>
-    </div>
 
-		<div *ngIf="lists.length === 0">
-        <p class="center">No lists available</p>
-    </div>
+<div class="container">
+	<div class="row justify-content-between">
+			<div class="col-auto">
+					<button class="btn btn-default" [routerLink]="['../']">Back</button>
+			</div>
+	    <div class="col-auto">
+	        <button (click)="addListModal.show()" class="btn btn-primary">Create new List</button>
+	    </div>
+	</div>
+
+	<div class="row list-container">
+	    <div *ngFor="let list of lists" class="list">
+	        <app-list [data]="list"></app-list>
+	    </div>
+
+			<div *ngIf="lists.length === 0" class="container">
+				<div class="row">
+					<div class="col">
+						<p class="text-center">No lists available</p>
+					</div>
+				</div>
+	    </div>
+	</div>
 </div>
