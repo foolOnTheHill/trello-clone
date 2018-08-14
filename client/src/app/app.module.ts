@@ -4,9 +4,6 @@ import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-import { DragulaModule } from 'ng2-dragula';
-import { ModalModule } from 'ngx-bootstrap';
-
 import { BoardsService, UserService } from './services';
 
 import { RegisterModule } from './register/register.module';
@@ -27,8 +24,6 @@ import { AuthGuard } from './guards';
 		FormsModule,
 		HttpClientModule,
     HttpModule,
-		DragulaModule,
-		ModalModule,
 		AppRoutingModule,
 		LoginModule,
 		RegisterModule,

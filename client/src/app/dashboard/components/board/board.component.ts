@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+import { DragulaService } from 'ng2-dragula';
 
 import { Board, List } from '../../../../common/interfaces';
 
@@ -11,16 +13,21 @@ import { BoardsService } from '../../../services';
 	styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit, OnDestroy {
+	@ViewChild('addListModal') addListModal;
 
 	boardId = '';
 	board : Board;
 
+	newList : List = { title: '' };
 	lists : List[];
+
+	error = null;
 
 	private sub : any;
 
 	constructor(
 		private boardService : BoardsService,
+		private dragularService : DragulaService,
 		private route: ActivatedRoute
 	) {
 		this.board = null;
@@ -40,6 +47,20 @@ export class BoardComponent implements OnInit, OnDestroy {
 
 			 this.fetchBoardLists();
 		});
+	}
+
+	async addList() {
+		try {
+			await this.boardService.createList(this.board._id, this.newList);
+
+			this.newList.title = '';
+
+			this.addListModal.hide();
+
+			this.fetchBoardLists();
+		} catch(error) {
+			this.error = error.message;
+		}
 	}
 
 	ngOnDestroy() {

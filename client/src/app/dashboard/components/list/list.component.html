@@ -1,14 +1,15 @@
-<!-- <div>
+
+<div>
 	<h4>
 		<strong>{{list.title}}</strong>
 	</h4>
 
-	<div id="{{list._id}}" [dragula]="'bag'" [dragulaModel]="list.cards" [ngClass]="{'cards-list': list.cards && list.cards.length, 'height-100': !list.cards || !list.cards.length}">
-		<div *ngFor="let card of list.cards" class="card">
-			<card id="{{card._id}}" [data]="card"></card>
+	<div id="{{list._id}}" [dragula]="'bag'" [dragulaModel]="cards" [ngClass]="{'cards-list': cards && cards.length, 'height-100': !list.cards || !list.cards.length}">
+		<div *ngFor="let card of cards" class="card">
+			<app-card id="{{card._id}}" [data]="card"></app-card>
 		</div>
 		<div *ngIf="!list.cards || !list.cards.length" class="height-100">
-			<span class="text-muted">No Cards available..</span>
+			<span class="text-muted">No cards available</span>
 		</div>
 	</div>
 
@@ -22,7 +23,7 @@
 	</div>
 	<div class="row padding-15" *ngIf="isFormVisible">
 		<div class="center">
-			<textarea class="form-control" [(ngModel)]="newCardTitle" placeholder="Card Title..."></textarea>
+			<textarea class="form-control" [(ngModel)]="newCard.title" placeholder="Card Title..."></textarea>
 		</div>
 		<div class="margin-top-10 display-inline-flex pull-right">
 			<div class="padding-left-5">
@@ -33,4 +34,4 @@
 			</div>
 		</div>
 	</div>
-</div> -->
+</div>
