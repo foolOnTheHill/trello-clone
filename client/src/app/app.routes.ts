@@ -7,7 +7,7 @@ import { AuthGuard } from './guards';
 	imports: [
 		RouterModule.forRoot([
 			{
-				path: '', loadChildren: './dashboard/dashboard.module#DashboardModule',
+				path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule',
 				canActivate: [AuthGuard],
 				canActivateChild: [AuthGuard]
 			},

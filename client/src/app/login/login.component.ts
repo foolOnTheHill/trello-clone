@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	ngOnInit() {
 		if (this.userService.currentUser) {
-			this.router.navigate(['/']);
+			this.router.navigate(['/dashboard']);
 		}
 	}
 
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 			await this.userService.login(this.credentials);
 
-			this.router.navigate(['/']);
+			this.router.navigate(['/dashboard']);
 		} catch (error) {
 			this.error = error.message;
 		} finally {
