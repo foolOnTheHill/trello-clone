@@ -4,9 +4,6 @@
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" (click)="addBoardModal.hide()" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
                 <h4 class="modal-title">Create new Board</h4>
             </div>
             <div class="modal-body">
@@ -16,7 +13,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-	        	<button type="button" class="btn btn-default" (click)="addBoardModal.hide()">Close</button>
+	        	<button type="button" class="btn btn-default" (click)="addBoardModal.hide()">Cancel</button>
         		<button class="btn btn-success" (click)="addBoard()">Save</button>
 	      	</div>
         </div>
@@ -44,6 +41,8 @@
 			<ul *ngFor="let board of boards" class="list-group">
 				<li [routerLink]="['/dashboard', board._id]" class="list-group-item d-flex justify-content-between align-items-center">
 					{{ board.title }}
+
+					<button type="button" class="btn btn-danger" (click)="deleteBoard($event, board._id)">Delete</button>
 				</li>
 			</ul>
 		</div>

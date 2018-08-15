@@ -65,6 +65,11 @@ export class BoardsService {
 	public async deleteBoard(token : AuthToken, boardId : BoardId) : Promise<void> {
 		const board = await this.findOneBoard(token, boardId);
 
+		const lists = await this.findAllLists(token, boardId);
+		for (let list of lists) {
+			await this.deleteList(token, boardId, list._id);
+		}
+
 		await board.remove();
 
 		return;
@@ -115,6 +120,11 @@ export class BoardsService {
 
 	public async deleteList(token : AuthToken, boardId : BoardId, listId : ListId) : Promise<void> {
 		const list = await this.findOneList(token, boardId, listId);
+
+		const cards = await this.findAllCards(token, boardId, listId);
+		for (let card of cards) {
+			await card.remove();
+		}
 
 		await list.remove();
 

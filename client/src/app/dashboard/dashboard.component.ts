@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Board } from '../../common/interfaces';
+import { BoardId } from '../../common/types';
 
 import { BoardsService, UserService } from '../services';
 
@@ -40,6 +41,18 @@ export class DashboardComponent implements OnInit {
 
 			this.addBoardModal.hide();
 			this.error = null;
+
+			this.fetchAllBoards();
+		} catch(error) {
+			this.error = error.message;
+		}
+	}
+
+	async deleteBoard(event, boardId : BoardId) {
+		event.stopPropagation();
+
+		try {
+			await this.boardsService.deleteBoard(boardId);
 
 			this.fetchAllBoards();
 		} catch(error) {
