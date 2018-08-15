@@ -23,7 +23,18 @@
           <div class="form-group">
             <input [(ngModel)]="credentials.password" name="password" type="password" required class="form-control input-underline input-lg" placeholder="Password">
           </div>
+					<div class="form-group">
+            <input [(ngModel)]="passwordConfirmation" name="password" type="password" required class="form-control input-underline input-lg" placeholder="Confirm Password">
+          </div>
         </div>
+
+				<div *ngIf="registerForm.valid && checkForErrors()" class="alert alert-danger" role="alert">
+					<strong>Oops!</strong>
+					<ul>
+						<li *ngIf="credentials.password.length < 6">The passwords must have at least 6 characters!</li>
+						<li *ngIf="credentials.password !== passwordConfirmation">The passwords must match!</li>
+					</ul>
+				</div>
 
 				<div *ngIf="error" class="alert alert-danger" role="alert">
 					<strong>Oops!</strong> {{ error }}
@@ -34,7 +45,7 @@
         </div>
 
 				<div>
-					<button type="submit" class="btn rounded-btn login-btn" [disabled]="registerForm.invalid || isRequesting">Register</button>
+					<button type="submit" class="btn rounded-btn login-btn" [disabled]="registerForm.invalid || isRequesting || credentials.password !== passwordConfirmation">Register</button>
         </div>
 
 				<br>

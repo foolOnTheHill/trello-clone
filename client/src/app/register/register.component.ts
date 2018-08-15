@@ -10,6 +10,7 @@ import { UserService } from '../services/user.service';
 	styleUrls: ['register.component.css']
 })
 export class RegisterComponent implements OnInit, OnDestroy {
+	passwordConfirmation : string;
 	error : string;
 	success : string;
 	isRequesting : boolean;
@@ -50,6 +51,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
 		} finally {
 			this.isRequesting = false;
 		}
+	}
+
+	checkForErrors() {
+		return this.credentials.password.length < 6 || this.credentials.password !== this.passwordConfirmation;
 	}
 
 }
