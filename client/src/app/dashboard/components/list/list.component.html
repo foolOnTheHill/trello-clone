@@ -1,7 +1,9 @@
 
 <div class="container">
-	<h4>
-		<strong>{{list.title}}</strong>
+	<h4 class="d-flex justify-content-between align-items-center">
+		<strong class="text-truncate">{{list.title}}</strong>
+
+		<button type="button" class="btn btn-danger btn-sm" (click)="deleteList(list._id)">Delete</button>
 	</h4>
 
 	<div id="{{list._id}}" [dragula]="'CARDS'" [dragulaModel]="cards" [ngClass]="{'cards-list': cards && cards.length, 'height-100': !list.cards || !list.cards.length}">

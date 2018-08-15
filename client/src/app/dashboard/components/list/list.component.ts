@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 
+import { ListId } from '../../../../common/types';
 import { List, Card } from '../../../../common/interfaces';
 
 import { BoardsService } from '../../../services';
@@ -10,6 +11,8 @@ import { BoardsService } from '../../../services';
 	styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
+	@Output() updateParent : EventEmitter<any>;
+
 	@Input('data') list : List;
 
 	newCard : Card = { title: '', content: '' };
@@ -17,12 +20,14 @@ export class ListComponent implements OnInit {
 
 	isFormVisible = false;
 
-	error = '';
+	error = null;
 
 	constructor(
 		private boardService : BoardsService
 	) {
 		this.cards = [];
+
+		this.updateParent = new EventEmitter();
 	}
 
 	async fetchListCards() {
@@ -40,6 +45,8 @@ export class ListComponent implements OnInit {
 			this.newCard.title = '';
 			this.newCard.content = '';
 
+			this.error = null;
+
 			await this.fetchListCards();
 
 			this.isFormVisible = false;
@@ -50,6 +57,16 @@ export class ListComponent implements OnInit {
 
 	setFormVisibility(status) {
 		this.isFormVisible = status;
+	}
+
+	async deleteList(listId : ListId) {
+		try {
+			await this.boardService.deleteList(this.list.board._id, this.list._id);
+
+			this.updateParent.emit();
+		} catch(error) {
+			this.error = error.message;
+		}
 	}
 
 }

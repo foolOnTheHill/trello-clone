@@ -39,7 +39,7 @@
 
 	<div class="row list-container">
 	    <div *ngFor="let list of lists" class="list">
-	        <app-list [data]="list"></app-list>
+	        <app-list [data]="list" (updateParent)="fetchBoardLists()"></app-list>
 	    </div>
 
 			<div *ngIf="lists.length === 0" class="container">

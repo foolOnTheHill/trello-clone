@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
 	@ViewChild('addBoardModal') addBoardModal;
 
 	newBoard : Board = { title: '' };
-	error = '';
+	error = null;
 
 	boards : Board[];
 
