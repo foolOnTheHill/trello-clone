@@ -1,7 +1,4 @@
-.card {
-	background: white;
-	border-radius: 3px;
-	padding: 5px;
-	margin-bottom: 5px;
+.custom-card {
+	position: fixed;
 	word-wrap: break-word;
 }
