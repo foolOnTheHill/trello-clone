@@ -28,6 +28,15 @@ Within ``/src/common`` we have functions, interfaces and types used throughout t
 
 Within ``/src/environments`` we define our constants such as ``backendUrl`` with the link to our Backend API Endpoints.
 
+## Future improvements
+
+There are some improvements that can be made to this project such as:
+
+- Add update operations for Boards, Lists and Cards;
+- Add support to cards reordering;
+- Add lists drag n' drop support;
+- Improve UX.
+
 ## Development information
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.5.
