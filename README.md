@@ -13,13 +13,13 @@ This project was developed using:
 
 ## Architecture and Organization
 
-Our app is splitted in ``Client`` and ``Server``. The architecture of each one is explained at their respectives ``README`` files.
+Our app is splitted in ``Client`` and ``Server``. The architecture of each one and future improvements are explained at their respectives ``README`` files.
 
 ## Running the project
 
 - Download the project's source code.
 - Install the Client and Server dependencies by running ``npm install`` at both ``/server`` and ``/client`` folders.
 - Modify ``/server/src/common/config/config.ts`` file to your preferences (pay special attention to the MongoDB's Connection URL).
-- At ``/server`` run ``npm run start`` to start our Server.
-- Modify ``/server/src/environments/environment.ts`` and ``/server/src/environments/environment.prod.ts`` (pay special attention to the Backend URL, pointing to where our server project is up and running).
+- At ``/server`` run ``npm run start`` to start the app's Server.
+- Modify ``/server/src/environments/environment.ts`` and ``/server/src/environments/environment.prod.ts`` (pay special attention to the Backend URL, pointing to where our Server is up and running).
 - At ``/client`` run ``ng serve`` to start our Client app in development mode.
